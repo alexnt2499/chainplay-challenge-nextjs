@@ -6,9 +6,9 @@ import CustomTable from "../components/table";
 import {
   IProjectContext,
   ProjectsContext,
-  useProjectsContext,
 } from "../contexts/useProjectsContext";
 import { ProjectData } from "../interface/project_data";
+import { base_url } from "../utils/config";
 
 function Home() {
   const projectsContext = useContext<IProjectContext>(ProjectsContext);
@@ -19,7 +19,7 @@ function Home() {
 
   async function getListProject() {
     try {
-      const res: any = await fetch("http://localhost:3000/api/example");
+      const res: any = await fetch(`${base_url}/api/example`);
       const data: Array<ProjectData> = await res.json();
       projectsContext.onInitData(
         data.map((value, index) => ({ ...value, Index: index }))
